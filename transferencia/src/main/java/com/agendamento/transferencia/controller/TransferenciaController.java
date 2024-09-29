@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transferencias")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransferenciaController {
 
     private  final TransferenciaService transferenciaService;
