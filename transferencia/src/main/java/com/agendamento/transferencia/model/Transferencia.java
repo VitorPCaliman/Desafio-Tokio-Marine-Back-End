@@ -35,5 +35,5 @@ public class Transferencia {
     private LocalDate dataTransferencia;
 
     @Column(nullable = false)
-    private BigDecimal taxa;
+    private Double taxa;
 }
