@@ -5,6 +5,7 @@ import com.agendamento.transferencia.service.TransferenciaService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +36,10 @@ public class TransferenciaController {
         Pageable pageable = PageRequest.of(page, size);
         Page<Transferencia> transferencias = transferenciaService.listarAgendamentos(pageable);
         return ResponseEntity.ok(transferencias);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleInvalidDateException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }

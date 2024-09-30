@@ -75,8 +75,9 @@ public class TransferenciaService {
                     .multiply(valorTransferencia)
                     .setScale(2, RoundingMode.HALF_EVEN)
                     .doubleValue();
+        } else {
+            throw new IllegalArgumentException("Data inválida para transferência. Não há taxa aplicável para datas acima de 50 dias.");
         }
-        return 0.00;
     }
 }
 
