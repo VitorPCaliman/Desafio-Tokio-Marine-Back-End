@@ -2,6 +2,9 @@ package com.agendamento.transferencia.controller;
 
 import com.agendamento.transferencia.model.Transferencia;
 import com.agendamento.transferencia.service.TransferenciaService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +28,12 @@ public class TransferenciaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Transferencia>> listarAgendamentos() {
-        List<Transferencia> agendamentos = transferenciaService.listarAgendamentos();
-        return ResponseEntity.ok(agendamentos);
+    public ResponseEntity<Page<Transferencia>> listarAgendamentos(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Transferencia> transferencias = transferenciaService.listarAgendamentos(pageable);
+        return ResponseEntity.ok(transferencias);
     }
 }

@@ -2,6 +2,8 @@ package com.agendamento.transferencia.service;
 
 import com.agendamento.transferencia.model.Transferencia;
 import com.agendamento.transferencia.repository.TransferenciaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -34,8 +36,8 @@ public class TransferenciaService {
         return transferenciaRepository.save(transferencia);
     }
 
-    public List<Transferencia> listarAgendamentos() {
-        return transferenciaRepository.findAll();
+    public Page<Transferencia> listarAgendamentos(Pageable pageable) {
+        return transferenciaRepository.findAll(pageable);
     }
 
     public Double calcularTaxa(LocalDate dataTransferencia, BigDecimal valorTransferencia) {
